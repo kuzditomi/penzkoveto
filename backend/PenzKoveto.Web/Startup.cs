@@ -59,6 +59,16 @@ namespace PenzKoveto.Web
                     options.RequireHttpsMetadata = false;
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("dev",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddTransient<IAuthRepository, AuthRepository>();
@@ -80,6 +90,7 @@ namespace PenzKoveto.Web
 
             ConfigureCustomExceptionMiddleware(app);
 
+            app.UseCors("dev");
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
