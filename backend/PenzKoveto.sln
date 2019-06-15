@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28705.295
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PenzKoveto.Repository", "PenzKoveto.Repository\PenzKoveto.Repository.csproj", "{83EE689F-238F-48F3-A989-715CF91584BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PenzKoveto.Web", "PenzKoveto.Web\PenzKoveto.Web.csproj", "{0A6835AF-3C50-4CDD-A04C-BD1C6CA60663}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83EE689F-238F-48F3-A989-715CF91584BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83EE689F-238F-48F3-A989-715CF91584BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83EE689F-238F-48F3-A989-715CF91584BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83EE689F-238F-48F3-A989-715CF91584BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A6835AF-3C50-4CDD-A04C-BD1C6CA60663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A6835AF-3C50-4CDD-A04C-BD1C6CA60663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A6835AF-3C50-4CDD-A04C-BD1C6CA60663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A6835AF-3C50-4CDD-A04C-BD1C6CA60663}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18BC655E-F0A1-427C-9D48-CEAC9154621C}
+	EndGlobalSection
+EndGlobal
