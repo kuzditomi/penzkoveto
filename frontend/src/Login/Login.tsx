@@ -1,48 +1,45 @@
 import React, { useState, FormEvent } from 'react';
+import { connect } from 'react-redux';
+import { login } from './login.action';
 
-const Login: React.FC = () => {
+type LoginProps = {
+    login(username: string, password: string): void;
+}
+
+const Login: React.FC<LoginProps> = ({login}) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
 
-    function login(evt: FormEvent) {
-        const loginData = {
-            UserName: username,
-            Password: password,
-        };
-
-        fetch('https://localhost:44320/api/account/login', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                setToken(data.token);
-            });
+    function onLogin(evt: FormEvent) {
+        login(username, password);
 
         evt.preventDefault();
     }
 
     return (
-        <form onSubmit={login}>
-            <label>
-                Username:
-                <input type="text" value={username} onChange={(evt) => setUsername(evt.target.value)}></input>
-            </label>
-            <label>
-                Password:
-                <input type="password" value={password} onChange={(evt) => setPassword(evt.target.value)}></input>
-            </label>
+        <form onSubmit={onLogin}>
+            <h1>Login</h1>
+            <div>
+                <label>
+                    Username:
+                    <input type="text" value={username} onChange={(evt) => setUsername(evt.target.value)}></input>
+                </label>
+            </div>
+            <div>
+                <label>
+                    Password:
+                    <input type="password" value={password} onChange={(evt) => setPassword(evt.target.value)}></input>
+                </label>
+            </div>
             <input type="submit" value="log in"></input>
-
-            {token}
         </form>
     );
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch: any) => ({
+    login: (username: string, password: string) => {
+        dispatch(login(username, password))
+    }
+});
+
+export default connect(null, mapDispatchToProps)(Login);

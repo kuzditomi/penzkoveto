@@ -92,7 +92,7 @@ namespace PenzKoveto.Web
 
             app.UseCors("dev");
             app.UseAuthentication();
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseMvc();
         }
 

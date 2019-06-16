@@ -1,11 +1,21 @@
 import React from 'react';
 import './App.css';
-import Login from './Login/Login';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { appReducer, defaultState } from './app.reducer';
+import { Provider } from 'react-redux';
+import Main from './Home/Main';
+import { loadUser } from './token-validate.actions';
+
+const store = createStore(appReducer, defaultState(), applyMiddleware(thunk));
+store.dispatch(loadUser() as any);
 
 const App: React.FC = () => {
   return (
     <div className="App">
-       <Login></Login>
+      <Provider store={store}>
+        <Main></Main>
+      </Provider>
     </div>
   );
 }
