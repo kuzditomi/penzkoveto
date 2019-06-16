@@ -17,7 +17,7 @@ export function login(username: string, password: string) {
             body: loginData
         })
             .then((response) => {
-                if(response.status === 200){
+                if (response.status === 200) {
                     return response.json();
                 }
 
@@ -30,5 +30,12 @@ export function login(username: string, password: string) {
             .catch(() => {
                 dispatch(dispatchTokenFailed());
             });
+    }
+}
+
+export function logout() {
+    return (dispatch: any) => {
+        localStorage.removeItem(tokenStorageKey);
+        dispatch(dispatchTokenFailed());
     }
 }

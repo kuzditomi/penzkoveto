@@ -6,6 +6,7 @@ import { appReducer, defaultState } from './app.reducer';
 import { Provider } from 'react-redux';
 import Main from './Home/Main';
 import { loadUser } from './token-validate.actions';
+import Menu from './Menu';
 
 const store = createStore(appReducer, defaultState(), applyMiddleware(thunk));
 store.dispatch(loadUser() as any);
@@ -14,7 +15,8 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Provider store={store}>
-        <Main></Main>
+        <Menu/>
+        <Main/>
       </Provider>
     </div>
   );
