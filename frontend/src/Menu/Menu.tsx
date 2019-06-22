@@ -1,51 +1,65 @@
-import React from 'react';
-import { AppState } from '../app.reducer';
-import { connect } from 'react-redux';
-import { logout } from '../Login/login.action';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core';
+import { Theme, Drawer, IconButton, Divider, List } from '@material-ui/core';
+import clsx from 'clsx';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
+export const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) => ({
-    main: {
-        // marginTop: theme.spacing(8),
+    drawerPaper: {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        width: drawerWidth,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    drawerPaperClose: {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(7),
+        [theme.breakpoints.up('sm')]: {
+            width: theme.spacing(9),
+        },
+    },
+    toolbarIcon: {
         display: 'flex',
         alignItems: 'center',
-    }
+        justifyContent: 'flex-end',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
+    },
 }));
 
 type MainProps = {
-    isLoggedIn: Loading<boolean>;
-    logout(): void;
+    isOpen: boolean;
+    onToggle: () => void;
 }
 
-const Menu: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
+const Menu: React.FC<MainProps> = ({ isOpen, onToggle }) => {
     const classes = useStyles();
 
-    function onLogout() {
-        logout();
-    }
-
-    if (isLoggedIn !== true)
-        return null;
-
     return (
-        <aside className={classes.main}>
-            <ul>
-                <li>Hello!</li>
-                <li><button onClick={() => onLogout()}>Logout</button></li>
-            </ul>
-        </aside>
+        <Drawer
+            variant="permanent"
+            classes={{
+                paper: clsx(classes.drawerPaper, !isOpen && classes.drawerPaperClose),
+            }}
+            open={isOpen}
+        >
+            <div className={classes.toolbarIcon}>
+                <IconButton onClick={() => onToggle()}>
+                    <ChevronLeftIcon />
+                </IconButton>
+            </div>
+            <Divider />
+        </Drawer>
     );
 }
 
-const mapStateToProps = (store: AppState) => ({
-    isLoggedIn: store.isLoggedIn
-});
 
-const mapDispatchToProps = (dispatch: any) => ({
-    logout: () => {
-        dispatch(logout())
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default Menu;

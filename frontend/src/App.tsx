@@ -34,7 +34,6 @@ const App: React.FC = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <Provider store={store}>
-        <Menu />
         <Main />
       </Provider>
     </MuiThemeProvider>
