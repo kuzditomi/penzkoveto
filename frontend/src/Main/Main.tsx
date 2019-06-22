@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { AppState } from '../app.reducer';
 import Login from '../Login/Login';
-import Home from './Home';
+import Home from '../Home/Home';
 import { connect } from 'react-redux';
+import "./main.scss";
 
 type MainProps = {
     isLoggedIn: Loading<boolean>

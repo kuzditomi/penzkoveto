@@ -1,7 +1,8 @@
 import React from 'react';
-import { AppState } from './app.reducer';
+import { AppState } from '../app.reducer';
 import { connect } from 'react-redux';
-import { logout } from './Login/login.action';
+import { logout } from '../Login/login.action';
+import "./menu.scss";
 
 type MainProps = {
     isLoggedIn: Loading<boolean>;
@@ -17,10 +18,12 @@ const Menu: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
         return null;
 
     return (
-        <ul>
-            <li>Hello!</li>
-            <li><button onClick={() => onLogout()}>Logout</button></li>
-        </ul>
+        <aside className="menu">
+            <ul>
+                <li>Hello!</li>
+                <li><button onClick={() => onLogout()}>Logout</button></li>
+            </ul>
+        </aside>
     );
 }
 
