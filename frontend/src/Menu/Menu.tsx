@@ -2,7 +2,6 @@ import React from 'react';
 import { AppState } from '../app.reducer';
 import { connect } from 'react-redux';
 import { logout } from '../Login/login.action';
-import "./menu.scss";
 
 type MainProps = {
     isLoggedIn: Loading<boolean>;

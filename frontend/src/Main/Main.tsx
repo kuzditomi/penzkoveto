@@ -4,7 +4,7 @@ import { AppState } from '../app.reducer';
 import Login from '../Login/Login';
 import Home from '../Home/Home';
 import { connect } from 'react-redux';
-import "./main.scss";
+import { CssBaseline, Container } from '@material-ui/core';
 
 type MainProps = {
     isLoggedIn: Loading<boolean>
@@ -22,9 +22,11 @@ const Main: React.FC<MainProps> = ({ isLoggedIn }) => {
     );
 
     return (
-        <main>
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            {/* <Topbar /> */}
             {isLoggedIn === 'loading' ? loader : page}
-        </main>
+        </Container>
     );
 }
 

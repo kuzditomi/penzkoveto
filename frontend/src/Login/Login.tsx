@@ -1,15 +1,44 @@
 import React, { useState, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import { login } from './login.action';
-import "./login.scss";
+import Button from '@material-ui/core/Button';
+import makeStyles from '@material-ui/styles/makeStyles/makeStyles';
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+import { Typography, TextField } from '@material-ui/core';
 
 type LoginProps = {
     login(username: string, password: string): void;
 }
 
+const useStyles = makeStyles((theme: Theme) => ({
+    '@global': {
+        body: {
+            backgroundColor: theme.palette.common.white,
+        },
+    },
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+
 const Login: React.FC<LoginProps> = ({ login }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const classes = useStyles();
 
     function onLogin(evt: FormEvent) {
         login(username, password);
@@ -18,18 +47,44 @@ const Login: React.FC<LoginProps> = ({ login }) => {
     }
 
     return (
-        <div className="login">
-            <form onSubmit={onLogin}>
-                <h1>Login</h1>
-                <div className="input-group">
-                    <label>Username:</label>
-                    <input type="text" value={username} onChange={(evt) => setUsername(evt.target.value)}></input>
-                </div>
-                <div className="input-group">
-                    <label>Password:</label>
-                    <input type="password" value={password} onChange={(evt) => setPassword(evt.target.value)}></input>
-                </div>
-                <button className="primary" type="submit">log in</button>
+        <div className={classes.paper}>
+            <Typography component="h1" variant="h5">
+                Sign in
+            </Typography>
+            <form className={classes.form} onSubmit={onLogin}>
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    autoFocus
+                    value={username} onChange={(evt) => setUsername(evt.target.value)}
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    value={password} onChange={(evt) => setPassword(evt.target.value)}
+                />
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Sign In
+                </Button>
             </form>
         </div>
     );
