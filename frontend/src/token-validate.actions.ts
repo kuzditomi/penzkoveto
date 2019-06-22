@@ -1,6 +1,5 @@
 import { Action } from "redux";
-
-export const tokenStorageKey = 'auth_token';
+import api, { tokenStorageKey } from "./api";
 
 export const ACTION_TOKEN_VALIDATE_SUCCESS = 'TOKEN_VALIDATE_SUCCESS';
 export const ACTION_TOKEN_VALIDATE_ERROR = 'TOKEN_VALIDATE_ERROR';
@@ -33,16 +32,12 @@ export function loadUser() {
     return (dispatch: any) => {
         const storedToken = localStorage.getItem(tokenStorageKey);
         if (storedToken) {
-            fetch('https://localhost:5001/api/account/me', {
-                headers: {
-                    'Authorization': `Bearer ${storedToken}`
-                }
-            })
+            api.get('account/me')
                 .then((response) => {
-                    if(response.status === 200){
-                        return response.json();
+                    if (response.status === 200) {
+                        return response.data;
                     }
-                    
+
                     throw response.status;
                 })
                 .then((userData) => {

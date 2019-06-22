@@ -1,24 +1,15 @@
-import { dispatchTokenFailed, loadUser, tokenStorageKey } from "../token-validate.actions";
+import { dispatchTokenFailed, loadUser } from "../token-validate.actions";
+import api, { tokenStorageKey } from "../api";
 
 export function login(username: string, password: string) {
     return (dispatch: any) => {
-        const loginData = JSON.stringify({
+        api.post('account/login', {
             UserName: username,
             Password: password
-        });
-
-        fetch('https://localhost:5001/api/account/login', {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: loginData
         })
             .then((response) => {
                 if (response.status === 200) {
-                    return response.json();
+                    return response.data;
                 }
 
                 throw response.status;

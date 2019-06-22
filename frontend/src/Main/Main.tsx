@@ -23,7 +23,7 @@ type MainProps = {
 }
 
 const Main: React.FC<MainProps> = ({ isLoggedIn }) => {
-    const [isOpen, setOpen] = useState(true);
+    const [isOpen, setOpen] = useState(false);
     const handleMenuToggle = () => {
         setOpen(!isOpen);
     };
