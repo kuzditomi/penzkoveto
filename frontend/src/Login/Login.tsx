@@ -17,10 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
     },
     paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        
     },
     avatar: {
         margin: theme.spacing(1),
@@ -36,9 +33,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const Login: React.FC<LoginProps> = ({ login }) => {
+    const classes = useStyles();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const classes = useStyles();
 
     function onLogin(evt: FormEvent) {
         login(username, password);

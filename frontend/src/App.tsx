@@ -32,14 +32,12 @@ const theme = createMuiTheme({
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <MuiThemeProvider theme={theme}>
-        <Provider store={store}>
-          <Menu />
-          <Main />
-        </Provider>
-      </MuiThemeProvider>
-    </div>
+    <MuiThemeProvider theme={theme}>
+      <Provider store={store}>
+        <Menu />
+        <Main />
+      </Provider>
+    </MuiThemeProvider>
   );
 }
 

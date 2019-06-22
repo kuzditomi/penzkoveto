@@ -2,6 +2,16 @@ import React from 'react';
 import { AppState } from '../app.reducer';
 import { connect } from 'react-redux';
 import { logout } from '../Login/login.action';
+import { makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) => ({
+    main: {
+        // marginTop: theme.spacing(8),
+        display: 'flex',
+        alignItems: 'center',
+    }
+}));
 
 type MainProps = {
     isLoggedIn: Loading<boolean>;
@@ -9,6 +19,8 @@ type MainProps = {
 }
 
 const Menu: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
+    const classes = useStyles();
+
     function onLogout() {
         logout();
     }
@@ -17,7 +29,7 @@ const Menu: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
         return null;
 
     return (
-        <aside className="menu">
+        <aside className={classes.main}>
             <ul>
                 <li>Hello!</li>
                 <li><button onClick={() => onLogout()}>Logout</button></li>
