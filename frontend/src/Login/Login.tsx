@@ -4,7 +4,7 @@ import { login } from './login.action';
 import Button from '@material-ui/core/Button';
 import makeStyles from '@material-ui/styles/makeStyles/makeStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
-import { Typography, TextField } from '@material-ui/core';
+import { Typography, TextField, Container } from '@material-ui/core';
 
 type LoginProps = {
     login(username: string, password: string): void;
@@ -16,8 +16,13 @@ const useStyles = makeStyles((theme: Theme) => ({
             backgroundColor: theme.palette.common.white,
         },
     },
+    login: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+    },
     paper: {
-        
+
     },
     avatar: {
         margin: theme.spacing(1),
@@ -29,6 +34,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+    },
+    title:{
+        textAlign: 'center',
     },
 }));
 
@@ -45,46 +53,48 @@ const Login: React.FC<LoginProps> = ({ login }) => {
     }
 
     return (
-        <div className={classes.paper}>
-            <Typography component="h1" variant="h5">
-                Sign in
-            </Typography>
-            <form className={classes.form} onSubmit={onLogin}>
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="username"
-                    label="Username"
-                    name="username"
-                    autoComplete="username"
-                    autoFocus
-                    value={username} onChange={(evt) => setUsername(evt.target.value)}
-                />
-                <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    value={password} onChange={(evt) => setPassword(evt.target.value)}
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
-                    Sign In
+        <Container component="main" maxWidth="xs" className={classes.login}>
+            <div className={classes.paper}>
+                <Typography variant="h3" className={classes.title}>
+                    Pénzkövető 2.0
+                </Typography>
+                <form className={classes.form} onSubmit={onLogin}>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        value={username} onChange={(evt) => setUsername(evt.target.value)}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        value={password} onChange={(evt) => setPassword(evt.target.value)}
+                    />
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Sign In
                 </Button>
-            </form>
-        </div>
+                </form>
+            </div>
+        </Container>
     );
 }
 

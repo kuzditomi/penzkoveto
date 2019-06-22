@@ -5,7 +5,7 @@ import { appReducer, defaultState } from './app.reducer';
 import { Provider } from 'react-redux';
 import Main from './Main/Main';
 import { loadUser } from './token-validate.actions';
-import Menu from './Menu/Menu';
+
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { grey, amber } from '@material-ui/core/colors'
 

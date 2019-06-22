@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Theme, Drawer, IconButton, Divider, List } from '@material-ui/core';
+import { Theme, Drawer, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import clsx from 'clsx';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 export const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) => ({
@@ -57,9 +59,24 @@ const Menu: React.FC<MainProps> = ({ isOpen, onToggle }) => {
                 </IconButton>
             </div>
             <Divider />
+            <List>
+                <div>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Dashboard" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <ShoppingCartIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Orders" />
+                    </ListItem>
+                </div>
+            </List>
         </Drawer>
     );
 }
-
 
 export default Menu;

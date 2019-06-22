@@ -4,10 +4,19 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { AppState } from '../app.reducer';
 import Login from '../Login/Login';
 import Home from '../Home/Home';
-import { CssBaseline, Container } from '@material-ui/core';
+import { CssBaseline, makeStyles, Theme } from '@material-ui/core';
 
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
+
+const useStyles = makeStyles((theme: Theme) => ({
+    content: {
+        flexGrow: 1,
+        height: '100vh',
+        overflow: 'auto',
+    },
+    appBarSpacer: theme.mixins.toolbar,
+}));
 
 type MainProps = {
     isLoggedIn: Loading<boolean>
@@ -19,13 +28,18 @@ const Main: React.FC<MainProps> = ({ isLoggedIn }) => {
         setOpen(!isOpen);
     };
 
+    const classes = useStyles();
+
     const pages = (
         <React.Fragment>
             <Header isOpen={isOpen} onToggle={handleMenuToggle}></Header>
             <Menu isOpen={isOpen} onToggle={handleMenuToggle}></Menu>
-            <BrowserRouter>
-                <Route exact path="/" component={isLoggedIn === true ? Home : Login} />
-            </BrowserRouter>
+            <div className={classes.content}>
+                <div className={classes.appBarSpacer} />
+                <BrowserRouter>
+                    <Route exact path="/" component={isLoggedIn === true ? Home : Login} />
+                </BrowserRouter>
+            </div>
         </React.Fragment>
     );
 
@@ -40,10 +54,10 @@ const Main: React.FC<MainProps> = ({ isLoggedIn }) => {
     );
 
     return (
-        <Container component="main" maxWidth="xs">
+        <React.Fragment>
             <CssBaseline />
             {isLoggedIn === 'loading' ? loader : page}
-        </Container>
+        </React.Fragment>
     );
 }
 
