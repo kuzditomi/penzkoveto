@@ -1,21 +1,32 @@
-import { AppState } from './../app.reducer';
+import { AppState, IUserData } from './../app.reducer';
 import { tokenValidateActions, ACTION_TOKEN_VALIDATE_ERROR } from '../token-validate.actions';
 import { ACTION_TOKEN_VALIDATE_SUCCESS } from './../token-validate.actions';
 import { tokenStorageKey } from '../api';
 
-export function isLoggedInReducer(state: AppState, action: tokenValidateActions): Loading<boolean> {
+export function userReducer(state: AppState, action: tokenValidateActions): IUserData {
     switch (action.type) {
         case ACTION_TOKEN_VALIDATE_SUCCESS:
             localStorage.setItem(tokenStorageKey, action.token);
 
-            return true;
+            return {
+                ...state.user,
+                isLoggedIn: true,
+                error: undefined,
+            };
         case ACTION_TOKEN_VALIDATE_ERROR:
-            return false;
+            return {
+                ...state.user,
+                isLoggedIn: false,
+                error: action.error
+            }
     }
 
-    return state.isLoggedIn;
+    return state.user;
 }
 
-export function defaultIsLoggedInState(): Loading<boolean> {
-    return 'loading';
+export function defaultUserState(): IUserData {
+    return {
+        isLoggedIn: 'loading',
+        error: undefined
+    };
 }

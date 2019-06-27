@@ -1,18 +1,23 @@
 import { Action } from "redux";
-import { isLoggedInReducer, defaultIsLoggedInState } from "./Login/login.reducer";
+import { userReducer, defaultUserState } from "./Login/login.reducer";
+
+export interface IUserData{
+    isLoggedIn: Loading<boolean>;
+    error: string | undefined;
+}
 
 export interface AppState {
-    isLoggedIn: Loading<boolean>
+    user: IUserData;
 }
 
 export function appReducer(state: AppState = defaultState(), action: Action) {
     return {
-        isLoggedIn: isLoggedInReducer(state, action)
+        user: userReducer(state, action)
     };
 }
 
 export function defaultState(): AppState {
     return {
-        isLoggedIn: defaultIsLoggedInState()
+        user: defaultUserState()
     };
 }

@@ -10,14 +10,16 @@ export interface IActionTokenValidateSuccess extends Action {
 }
 
 export interface IActionTokenValidateError extends Action {
-    type: 'TOKEN_VALIDATE_ERROR'
+    type: 'TOKEN_VALIDATE_ERROR',
+    error?: string
 }
 
 export type tokenValidateActions = IActionTokenValidateSuccess | IActionTokenValidateError;
 
-export function dispatchTokenFailed(): IActionTokenValidateError {
+export function dispatchTokenFailed(error?: string): IActionTokenValidateError {
     return {
-        type: ACTION_TOKEN_VALIDATE_ERROR
+        type: ACTION_TOKEN_VALIDATE_ERROR,
+        error
     };
 }
 
@@ -44,11 +46,11 @@ export function loadUser() {
                     dispatch(dispatchTokenSuccess(storedToken));
                     // dispatch(dispatchUserData(userdata));
                 })
-                .catch(() => {
-                    dispatch(dispatchTokenFailed());
+                .catch((error) => {
+                    dispatch(dispatchTokenFailed(error));
                 });
         } else {
-            dispatch(dispatchTokenFailed());
+            dispatch(dispatchTokenFailed(undefined));
         }
     };
 }

@@ -64,9 +64,10 @@ namespace PenzKoveto.Web
                 options.AddPolicy("dev",
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
                 });
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

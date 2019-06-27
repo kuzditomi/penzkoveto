@@ -4,6 +4,7 @@ import { Theme, IconButton, AppBar, Toolbar, Typography } from '@material-ui/cor
 import clsx from 'clsx';
 import { drawerWidth } from '../Menu/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
+import LogoutIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles((theme: Theme) => ({
     appBar: {
@@ -30,14 +31,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     menuButtonHidden: {
         display: 'none',
     },
+    filler: {
+        flex: 1,
+    }
 }));
 
 type HeaderProps = {
     isOpen: boolean;
     onToggle: () => void;
+    onLogout: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isOpen, onToggle }) => {
+const Header: React.FC<HeaderProps> = ({ isOpen, onToggle, onLogout }) => {
     const classes = useStyles();
 
     return (
@@ -53,7 +58,14 @@ const Header: React.FC<HeaderProps> = ({ isOpen, onToggle }) => {
                 </IconButton>
                 <Typography component="h1" variant="h6" color="inherit" noWrap>
                     Pénzkövető 2.0
-            </Typography>
+                </Typography>
+                <div className={classes.filler}/>
+                <IconButton
+                    onClick={() => onLogout()}
+                    aria-label="Sign off"
+                    title="Sign off">
+                    <LogoutIcon />
+                </IconButton>
             </Toolbar>
         </AppBar>
     );

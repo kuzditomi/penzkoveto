@@ -8,6 +8,7 @@ import { CssBaseline, makeStyles, Theme } from '@material-ui/core';
 
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
+import { logout } from '../Login/login.action';
 
 const useStyles = makeStyles((theme: Theme) => ({
     content: {
@@ -19,10 +20,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type MainProps = {
-    isLoggedIn: Loading<boolean>
+    isLoggedIn: Loading<boolean>,
+    logout(): void
 }
 
-const Main: React.FC<MainProps> = ({ isLoggedIn }) => {
+const Main: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
     const [isOpen, setOpen] = useState(false);
     const handleMenuToggle = () => {
         setOpen(!isOpen);
@@ -32,7 +34,7 @@ const Main: React.FC<MainProps> = ({ isLoggedIn }) => {
 
     const pages = (
         <React.Fragment>
-            <Header isOpen={isOpen} onToggle={handleMenuToggle}></Header>
+            <Header isOpen={isOpen} onToggle={handleMenuToggle} onLogout={logout}></Header>
             <Menu isOpen={isOpen} onToggle={handleMenuToggle}></Menu>
             <div className={classes.content}>
                 <div className={classes.appBarSpacer} />
@@ -63,8 +65,15 @@ const Main: React.FC<MainProps> = ({ isLoggedIn }) => {
 
 const mapStateToProps = (store: AppState) => {
     return {
-        isLoggedIn: store.isLoggedIn
+        isLoggedIn: store.user.isLoggedIn
     }
 };
 
-export default connect(mapStateToProps, null)(Main);
+const mapDispatchToProps = (dispatch: any) => ({
+    logout: () => {
+        dispatch(logout());
+    }
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
