@@ -1,5 +1,7 @@
 import { Action } from "redux";
 import { userReducer, defaultUserState } from "./Login/login.reducer";
+import { IRecord } from "./models/record";
+import { listReducer, defaultListState } from "./Pages/List/list.reducer";
 
 export interface IUserInfo{
     id: string;
@@ -14,16 +16,19 @@ export interface IUserData {
 
 export interface AppState {
     user: IUserData;
+    list: Loading<IRecord[]>;
 }
 
 export function appReducer(state: AppState = defaultState(), action: Action) {
     return {
-        user: userReducer(state, action)
+        user: userReducer(state, action),
+        list: listReducer(state, action)
     };
 }
 
 export function defaultState(): AppState {
     return {
-        user: defaultUserState()
+        user: defaultUserState(),
+        list: defaultListState()
     };
 }

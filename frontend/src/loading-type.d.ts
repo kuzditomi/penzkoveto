@@ -1,1 +1,1 @@
-declare type Loading<T> = T | 'loading';
+declare type Loading<T> = T | 'loading' | undefined;

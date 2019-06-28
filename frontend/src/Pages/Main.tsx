@@ -10,7 +10,7 @@ import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
 import { logout } from '../Login/login.action';
 import AddNewPage from './AddNewPage/AddNewPage';
-import ListPage from './List/List';
+import ListPage from './List/ListPage';
 
 const useStyles = makeStyles((theme: Theme) => ({
     content: {

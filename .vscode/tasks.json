@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "yarn start",
             "options": {
-                "cwd": "frontend",
+                "cwd": "frontend"
             },
             "problemMatcher": [
                 "$eslint-stylish"
@@ -23,7 +23,7 @@
             "type": "shell",
             "command": "dotnet run",
             "options": {
-                "cwd": "backend/PenzKoveto.Web",
+                "cwd": "backend/PenzKoveto.Web"
             },
             "problemMatcher": [
                 "$msCompile"
@@ -31,6 +31,14 @@
             "presentation": {
                 "group": "application"
             }
+        },
+        {
+            "label": "Start all",
+            "dependsOn": [
+                "Start backend",
+                "Start frontend"
+            ],
+            "problemMatcher": []
         }
     ]
 }
