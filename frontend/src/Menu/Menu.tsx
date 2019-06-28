@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         padding: '0 8px',
         ...theme.mixins.toolbar,
     },
+    list: {
+        textDecoration: 'none'
+    }
 }));
 
 type MainProps = {
@@ -62,20 +65,16 @@ const Menu: React.FC<MainProps> = ({ isOpen, onToggle }) => {
             </div>
             <Divider />
             <List>
-                <div>
-                <ListItem button>
+                <div className={classes.list}>
+                    <ListItem button component={Link} to="/">
                         <ListItemIcon>
-                            <Link to="/">
-                                <HomeIcon />
-                            </Link>
+                            <HomeIcon />
                         </ListItemIcon>
                         <ListItemText primary="Home" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button component={Link} to="/add-new">
                         <ListItemIcon>
-                            <Link to="/add-new">
-                                <AddIcon />
-                            </Link>
+                            <AddIcon />
                         </ListItemIcon>
                         <ListItemText primary="Record" />
                     </ListItem>
