@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Container, makeStyles, Theme, Typography, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { AppState } from '../../app.reducer';
 import { IRecord } from '../../models/record';
@@ -30,7 +30,7 @@ const ListPage: React.FC<ListPageProps> = ({ items, loadList }) => {
 
     let content;
     if (items === "loading") {
-        content = <p>Loading...</p>
+        content = <CircularProgress />
     } else if (items !== undefined) {
         content = <ItemList items={items}></ItemList>
     }

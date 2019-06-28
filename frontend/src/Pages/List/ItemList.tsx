@@ -9,9 +9,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginTop: theme.spacing(3),
         overflowX: 'auto',
     },
-    id: {
-        width: 100
-    },
 }));
 
 type ItemsListProps = {
@@ -26,7 +23,7 @@ const ItemList: React.FC<ItemsListProps> = ({ items }) => {
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell className={classes.id}>Id</TableCell>
+                        <TableCell>Id</TableCell>
                         <TableCell>Type</TableCell>
                         <TableCell>Name</TableCell>
                         <TableCell>Date</TableCell>
