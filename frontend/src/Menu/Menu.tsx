@@ -1,12 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Theme, Drawer, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import AddIcon from '@material-ui/icons/Add';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HomeIcon from '@material-ui/icons/Home';
-import { Link } from 'react-router-dom';
+import ListIcon from '@material-ui/icons/List';
 
 export const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) => ({
@@ -78,11 +79,11 @@ const Menu: React.FC<MainProps> = ({ isOpen, onToggle }) => {
                         </ListItemIcon>
                         <ListItemText primary="Record" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem button component={Link} to="/list">
                         <ListItemIcon>
-                            <ShoppingCartIcon />
+                            <ListIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Orders" />
+                        <ListItemText primary="List" />
                     </ListItem>
                 </div>
             </List>

@@ -10,6 +10,7 @@ import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
 import { logout } from '../Login/login.action';
 import AddNewPage from './AddNewPage/AddNewPage';
+import ListPage from './List/List';
 
 const useStyles = makeStyles((theme: Theme) => ({
     content: {
@@ -42,6 +43,7 @@ const Main: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
 
                 <Route exact path="/" component={isLoggedIn === true ? Home : Login} />
                 <Route path="/add-new" component={AddNewPage} />
+                <Route path="/list" component={ListPage} />
             </div>
         </BrowserRouter>
     );
