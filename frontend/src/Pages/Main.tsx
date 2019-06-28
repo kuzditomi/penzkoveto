@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { AppState } from '../app.reducer';
 import Login from '../Login/Login';
-import Home from '../Home/Home';
+import Home from './Home/Home';
 import { CssBaseline, makeStyles, Theme } from '@material-ui/core';
 
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
 import { logout } from '../Login/login.action';
+import AddNewPage from './AddNewPage/AddNewPage';
 
 const useStyles = makeStyles((theme: Theme) => ({
     content: {
@@ -33,16 +34,16 @@ const Main: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
     const classes = useStyles();
 
     const pages = (
-        <React.Fragment>
+        <BrowserRouter>
             <Header isOpen={isOpen} onToggle={handleMenuToggle} onLogout={logout}></Header>
             <Menu isOpen={isOpen} onToggle={handleMenuToggle}></Menu>
             <div className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <BrowserRouter>
-                    <Route exact path="/" component={isLoggedIn === true ? Home : Login} />
-                </BrowserRouter>
+
+                <Route exact path="/" component={isLoggedIn === true ? Home : Login} />
+                <Route path="/add-new" component={AddNewPage} />
             </div>
-        </React.Fragment>
+        </BrowserRouter>
     );
 
     const page = (

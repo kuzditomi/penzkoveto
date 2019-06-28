@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, makeStyles, Theme, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { AppState } from './../app.reducer';
+import { AppState } from '../../app.reducer';
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {

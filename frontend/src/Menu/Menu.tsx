@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/styles';
 import { Theme, Drawer, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import clsx from 'clsx';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import AddIcon from '@material-ui/icons/Add';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import HomeIcon from '@material-ui/icons/Home';
+import { Link } from 'react-router-dom';
 
 export const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) => ({
@@ -61,11 +63,21 @@ const Menu: React.FC<MainProps> = ({ isOpen, onToggle }) => {
             <Divider />
             <List>
                 <div>
+                <ListItem button>
+                        <ListItemIcon>
+                            <Link to="/">
+                                <HomeIcon />
+                            </Link>
+                        </ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItem>
                     <ListItem button>
                         <ListItemIcon>
-                            <DashboardIcon />
+                            <Link to="/add-new">
+                                <AddIcon />
+                            </Link>
                         </ListItemIcon>
-                        <ListItemText primary="Dashboard" />
+                        <ListItemText primary="Record" />
                     </ListItem>
                     <ListItem button>
                         <ListItemIcon>

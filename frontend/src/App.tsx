@@ -3,7 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { appReducer, defaultState } from './app.reducer';
 import { Provider } from 'react-redux';
-import Main from './Main/Main';
+import Main from './Pages/Main';
 import { loadUser } from './token-validate.actions';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
