@@ -1,11 +1,16 @@
 import React from 'react';
-import { Container, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { IRecord } from '../../models/record';
+import DisplayDateTime from '../../Shared/DisplayDateTime';
 
 const useStyles = makeStyles((theme: Theme) => ({
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
+    root: {
+        // width: '50%',
+        marginTop: theme.spacing(3),
+        overflowX: 'auto',
+    },
+    id: {
+        width: 100
     },
 }));
 
@@ -13,11 +18,34 @@ type ItemsListProps = {
     items: IRecord[]
 }
 
-const ItemList: React.FC<ItemsListProps> = ({items}) => {
+const ItemList: React.FC<ItemsListProps> = ({ items }) => {
     const classes = useStyles();
-    
+
     return (
-        <pre>{items[0].name}</pre>
+        <Paper className={classes.root}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell className={classes.id}>Id</TableCell>
+                        <TableCell>Type</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Date</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {items.map(item => (
+                        <TableRow key={item.id}>
+                            <TableCell component="th">
+                                {item.id}
+                            </TableCell>
+                            <TableCell>{item.type}</TableCell>
+                            <TableCell>{item.name}</TableCell>
+                            <TableCell><DisplayDateTime dateTime={item.date}/></TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </Paper>
     );
 }
 
