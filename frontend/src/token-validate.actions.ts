@@ -1,8 +1,10 @@
 import { Action } from "redux";
 import api, { tokenStorageKey } from "./api";
+import { IUserInfo } from "./app.reducer";
 
 export const ACTION_TOKEN_VALIDATE_SUCCESS = 'TOKEN_VALIDATE_SUCCESS';
 export const ACTION_TOKEN_VALIDATE_ERROR = 'TOKEN_VALIDATE_ERROR';
+export const ACTION_USER_INFO_SUCCESS = 'USER_INFO_SUCCESS';
 
 export interface IActionTokenValidateSuccess extends Action {
     type: 'TOKEN_VALIDATE_SUCCESS',
@@ -14,7 +16,13 @@ export interface IActionTokenValidateError extends Action {
     error?: string
 }
 
-export type tokenValidateActions = IActionTokenValidateSuccess | IActionTokenValidateError;
+export interface IActionUserInfoSuccess extends Action {
+    type: 'USER_INFO_SUCCESS',
+    userInfo: IUserInfo
+}
+
+
+export type tokenValidateActions = IActionTokenValidateSuccess | IActionTokenValidateError | IActionUserInfoSuccess;
 
 export function dispatchTokenFailed(error?: string): IActionTokenValidateError {
     return {
@@ -30,6 +38,13 @@ export function dispatchTokenSuccess(token: string): IActionTokenValidateSuccess
     };
 }
 
+function dispatchUserInfo(userInfo: IUserInfo): IActionUserInfoSuccess {
+    return {
+        type: ACTION_USER_INFO_SUCCESS,
+        userInfo
+    };
+}
+
 export function loadUser() {
     return (dispatch: any) => {
         const storedToken = localStorage.getItem(tokenStorageKey);
@@ -42,9 +57,9 @@ export function loadUser() {
 
                     throw response.status;
                 })
-                .then((userData) => {
+                .then((userinfo: IUserInfo) => {
                     dispatch(dispatchTokenSuccess(storedToken));
-                    // dispatch(dispatchUserData(userdata));
+                    dispatch(dispatchUserInfo(userinfo));
                 })
                 .catch((error) => {
                     dispatch(dispatchTokenFailed(error));
