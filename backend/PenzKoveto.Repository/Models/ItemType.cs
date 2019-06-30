@@ -2,7 +2,7 @@
 {
     public enum ItemType
     {
-        Spending,
-        Income
+        Spending = 0,
+        Income = 1
     }
 }

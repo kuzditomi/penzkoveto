@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { AppState } from '../../app.reducer';
 import AddNewForm from './AddForm';
 import { IRecord } from '../../Models/record';
+import { addNewRecord } from './addnew.actions';
 
 type AddNewPageProps = {
     onAddNew(record: Partial<IRecord>): void;
@@ -21,8 +22,7 @@ const mapStateToProps = (store: AppState) => {
 
 const mapDispatchToProps = (dispatch: any) => ({
     onAddNew: (record: Partial<IRecord>) => {
-        console.log(record);
-        // dispatch(loadList());
+        dispatch(addNewRecord(record));
     }
 });
 

@@ -1,16 +1,23 @@
 import React, { useEffect } from 'react';
-import { Container, makeStyles, Theme, Typography, CircularProgress } from '@material-ui/core';
+import { Container, makeStyles, Theme, Typography, CircularProgress, Fab } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AppState } from '../../app.reducer';
 import { IRecord } from '../../Models/record';
 import { loadList } from './list.actions';
 import ItemList from './ItemList';
 
+import RefreshIcon from '@material-ui/icons/Refresh';
+import AddIcon from '@material-ui/icons/Add';
+
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
     },
+    margin: {
+        margin: theme.spacing(1),
+    }
 }));
 
 type ListPageProps = {
@@ -32,13 +39,23 @@ const ListPage: React.FC<ListPageProps> = ({ items, loadList }) => {
     if (items === "loading") {
         content = <CircularProgress />
     } else if (items !== undefined) {
-        content = <ItemList items={items}></ItemList>
+        content = (
+            <React.Fragment>
+                <Fab component={Link} to="/add-new" color="primary" size="small" variant="extended">
+                    <AddIcon /> ADD
+                </Fab>
+                <Fab color="secondary" size="small" variant="extended" className={classes.margin} onClick={()=>{ loadList() }}>
+                    <RefreshIcon /> RELOAD
+                </Fab>
+                <ItemList items={items}></ItemList>
+            </React.Fragment>
+        )
     }
 
     return (
         <Container maxWidth="lg" className={classes.container}>
             <Typography variant="h3">Uncategorized items</Typography>
-            { content }
+            {content}
         </Container>
     );
 }
