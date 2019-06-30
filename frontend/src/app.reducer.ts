@@ -1,6 +1,6 @@
 import { Action } from "redux";
-import { userReducer, defaultUserState } from "./Login/login.reducer";
-import { IRecord } from "./models/record";
+import { userReducer, defaultUserState } from "./Pages/Login/login.reducer";
+import { IRecord } from "./Models/record";
 import { listReducer, defaultListState } from "./Pages/List/list.reducer";
 
 export interface IUserInfo{

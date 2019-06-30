@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
-import { IRecord } from '../../models/record';
+import { IRecord } from '../../Models/record';
 import DisplayDateTime from '../../Shared/DisplayDateTime';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -26,6 +26,7 @@ const ItemList: React.FC<ItemsListProps> = ({ items }) => {
                         <TableCell>Id</TableCell>
                         <TableCell>Type</TableCell>
                         <TableCell>Name</TableCell>
+                        <TableCell>Amount</TableCell>
                         <TableCell>Date</TableCell>
                     </TableRow>
                 </TableHead>
@@ -37,6 +38,7 @@ const ItemList: React.FC<ItemsListProps> = ({ items }) => {
                             </TableCell>
                             <TableCell>{item.type}</TableCell>
                             <TableCell>{item.name}</TableCell>
+                            <TableCell>{item.cost}</TableCell>
                             <TableCell><DisplayDateTime dateTime={item.date}/></TableCell>
                         </TableRow>
                     ))}

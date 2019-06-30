@@ -64,27 +64,25 @@ const Menu: React.FC<MainProps> = ({ isOpen, onToggle }) => {
                 </IconButton>
             </div>
             <Divider />
-            <List>
-                <div className={classes.list}>
-                    <ListItem button component={Link} to="/">
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Home" />
-                    </ListItem>
-                    <ListItem button component={Link} to="/add-new">
-                        <ListItemIcon>
-                            <AddIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Record" />
-                    </ListItem>
-                    <ListItem button component={Link} to="/list">
-                        <ListItemIcon>
-                            <ListIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="List" />
-                    </ListItem>
-                </div>
+            <List className={classes.list}>
+                <ListItem button component={Link} to="/">
+                    <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Home" />
+                </ListItem>
+                <ListItem button component={Link} to="/add-new">
+                    <ListItemIcon>
+                        <AddIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Record" />
+                </ListItem>
+                <ListItem button component={Link} to="/list">
+                    <ListItemIcon>
+                        <ListIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="List" />
+                </ListItem>
             </List>
         </Drawer>
     );

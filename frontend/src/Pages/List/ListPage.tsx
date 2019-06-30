@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Container, makeStyles, Theme, Typography, CircularProgress } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { AppState } from '../../app.reducer';
-import { IRecord } from '../../models/record';
+import { IRecord } from '../../Models/record';
 import { loadList } from './list.actions';
 import ItemList from './ItemList';
 

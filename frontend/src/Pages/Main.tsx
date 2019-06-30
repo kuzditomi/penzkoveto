@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { AppState } from '../app.reducer';
-import Login from '../Login/Login';
+import Login from './Login/Login';
 import Home from './Home/Home';
 import { CssBaseline, makeStyles, Theme } from '@material-ui/core';
 
 import Menu from '../Menu/Menu';
 import Header from '../Header/Header';
-import { logout } from '../Login/login.action';
+import { logout } from './Login/login.action';
 import AddNewPage from './AddNewPage/AddNewPage';
 import ListPage from './List/ListPage';
 

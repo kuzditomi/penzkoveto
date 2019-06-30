@@ -1,5 +1,5 @@
-import { dispatchTokenFailed, loadUser } from "../token-validate.actions";
-import api, { tokenStorageKey } from "../api";
+import { dispatchTokenFailed, loadUser } from "../../token-validate.actions";
+import api, { tokenStorageKey } from "../../api";
 
 export function login(username: string, password: string) {
     return (dispatch: any) => {

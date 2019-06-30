@@ -1,25 +1,16 @@
 import React from 'react';
-import { Container, makeStyles, Theme, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { AppState } from '../../app.reducer';
+import AddNewForm from './AddForm';
+import { IRecord } from '../../Models/record';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-}));
-
-type AddNewPage = {
+type AddNewPageProps = {
+    onAddNew(record: Partial<IRecord>): void;
 }
 
-const AddNewPage: React.FC<AddNewPage> = () => {
-    const classes = useStyles();
-
+const AddNewPage: React.FC<AddNewPageProps> = ({onAddNew}) => {
     return (
-        <Container maxWidth="lg" className={classes.container}>
-            <Typography variant="h1">Add new!</Typography>
-        </Container>
+        <AddNewForm addNew={onAddNew}></AddNewForm>
     );
 }
 
@@ -28,4 +19,11 @@ const mapStateToProps = (store: AppState) => {
     }
 };
 
-export default connect(mapStateToProps)(AddNewPage);
+const mapDispatchToProps = (dispatch: any) => ({
+    onAddNew: (record: Partial<IRecord>) => {
+        console.log(record);
+        // dispatch(loadList());
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewPage);

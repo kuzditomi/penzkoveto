@@ -1,7 +1,7 @@
-import { AppState, IUserData } from './../app.reducer';
-import { tokenValidateActions, ACTION_TOKEN_VALIDATE_ERROR } from '../token-validate.actions';
-import { ACTION_TOKEN_VALIDATE_SUCCESS, ACTION_USER_INFO_SUCCESS } from './../token-validate.actions';
-import { tokenStorageKey } from '../api';
+import { AppState, IUserData } from '../../app.reducer';
+import { tokenValidateActions, ACTION_TOKEN_VALIDATE_ERROR } from '../../token-validate.actions';
+import { ACTION_TOKEN_VALIDATE_SUCCESS, ACTION_USER_INFO_SUCCESS } from '../../token-validate.actions';
+import { tokenStorageKey } from '../../api';
 
 export function userReducer(state: AppState, action: tokenValidateActions): IUserData {
     switch (action.type) {

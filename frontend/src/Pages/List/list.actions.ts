@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import api from "../../api";
-import { IRecord } from "../../models/record";
+import { IRecord } from "../../Models/record";
 
 export const ACTION_LOAD_LIST_START = 'LIST_LOAD_START';
 export const ACTION_LOAD_LIST_SUCCESS = 'LIST_LOAD_SUCCESS';
