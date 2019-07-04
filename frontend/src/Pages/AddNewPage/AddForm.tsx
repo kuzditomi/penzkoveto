@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, Typography, Paper, Grid, TextField, Button } from '@material-ui/core';
 import { IRecord } from '../../Models/record';
+import Autocomplete, { IAutocompleteSuggestion } from './../../Shared/Autocomplete';
+import { ICategory } from '../../Models/category';
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -16,14 +18,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 type AddNewFormProps = {
     addNew(record: Partial<IRecord>): void;
+    categories: ICategory[];
 }
 
-const AddNewForm: React.FC<AddNewFormProps> = ({addNew}) => {
+const AddNewForm: React.FC<AddNewFormProps> = ({ addNew, categories }) => {
     const classes = useStyles();
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
 
-    const recordNew = ()=>{
+    const recordNew = () => {
         const model: Partial<IRecord> = {
             name: name,
             cost: Number(cost),
@@ -32,6 +35,13 @@ const AddNewForm: React.FC<AddNewFormProps> = ({addNew}) => {
 
         addNew(model);
     };
+
+    const getCategories = (): IAutocompleteSuggestion[] => {
+        return (categories || []).map(c => ({
+            name: c.name,
+            value: c.id
+        }));
+    }
 
     return (
         <Paper className={classes.paper}>
@@ -47,7 +57,7 @@ const AddNewForm: React.FC<AddNewFormProps> = ({addNew}) => {
                         label="Description"
                         fullWidth
                         value={name}
-                        onChange={(evt)=>{setName(evt.target.value)}}
+                        onChange={(evt: any) => { setName(evt.target.value) }}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -59,14 +69,20 @@ const AddNewForm: React.FC<AddNewFormProps> = ({addNew}) => {
                         label="Cost"
                         fullWidth
                         value={cost}
-                        onChange={(evt)=>{setCost(evt.target.value)}}
+                        onChange={(evt: any) => { setCost(evt.target.value) }}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <Autocomplete
+                        label="Category"
+                        suggestions={getCategories}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={()=>recordNew()}>
+                        onClick={() => recordNew()}>
                         Record
                     </Button>
                 </Grid>
