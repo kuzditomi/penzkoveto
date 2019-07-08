@@ -1,10 +1,12 @@
 import { AppState } from "../../app.reducer";
-import { addNewAction, ACTION_ADD_NEW_START, ACTION_ADD_NEW_SUCCESS } from "./addnew.actions";
+import { addNewAction, ACTION_ADD_NEW_START, ACTION_ADD_NEW_SUCCESS, ACTION_ADD_NEW } from "./addnew.actions";
 
 export function addnewReducer(state: AppState, action: addNewAction): Loading<boolean> {
-    switch(action.type){
+    switch (action.type) {
+        case ACTION_ADD_NEW:
+            return undefined;
         case ACTION_ADD_NEW_START:
-             return "loading";
+            return "loading";
         case ACTION_ADD_NEW_SUCCESS:
             return true;
     }
