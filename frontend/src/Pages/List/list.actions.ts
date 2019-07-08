@@ -33,7 +33,7 @@ export function loadList() {
     return (dispatch: any) => {
         dispatch(dispatchListLoad());
 
-        api.get('items/uncategorized')
+        api.get('items')
             .then((response) => {
                 if (response.status === 200) {
                     return response.data;

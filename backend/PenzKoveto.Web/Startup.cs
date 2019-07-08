@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,9 +10,30 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PenzKoveto.Repository;
 using PenzKoveto.Repository.Models;
+using System.Reflection;
+using System.IO;
+using System;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Collections.Generic;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace PenzKoveto.Web
 {
+    public class SecurityRequirementsDocumentFilter : IDocumentFilter
+    {
+        public void Apply(SwaggerDocument document, DocumentFilterContext context)
+        {
+            document.Security = new List<IDictionary<string, IEnumerable<string>>>()
+            {
+                new Dictionary<string, IEnumerable<string>>()
+                {
+                    { "Bearer", new string[]{ } },
+                    { "Basic", new string[]{ } },
+                }
+            };
+        }
+    }
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -74,6 +94,34 @@ namespace PenzKoveto.Web
 
             services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<IMoneyRepository, MoneyRepository>();
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
+                {
+                    Version = "v1",
+                    Title = "Penzkoveto API",
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.DocumentFilter<SecurityRequirementsDocumentFilter>();
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "oauth2", new string[] { } }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -94,6 +142,17 @@ namespace PenzKoveto.Web
             app.UseCors("dev");
             app.UseAuthentication();
             // app.UseHttpsRedirection();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Penzkoveto API");
+            });
+
             app.UseMvc();
         }
 

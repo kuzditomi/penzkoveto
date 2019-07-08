@@ -32,6 +32,7 @@ namespace Penzkoveto.Web.Controllers
 
         [AllowAnonymous]
         [Route("Register")]
+        [HttpPost]
         public async Task<ActionResult> Register(UserCreateModel userModel)
         {
             if (!ModelState.IsValid)

@@ -21,6 +21,17 @@ namespace Penzkoveto.Web.Controllers
         }
 
         [HttpGet]
+        [Route("")]
+        public ActionResult GetItems()
+        {
+            var list = moneyRepository.GetItems(CurrentUserId)
+                    .Select(i => new ListItem(i))
+                    .ToList();
+
+            return Ok(list);
+        }
+        
+        [HttpGet]
         [Route("{year}/{month}")]
         public ActionResult GetItemList(int year = 0, int month = 0)
         {
