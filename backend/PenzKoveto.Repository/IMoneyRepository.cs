@@ -7,7 +7,7 @@ namespace PenzKoveto.Repository
     public interface IMoneyRepository
     {
         // Items
-        List<Item> GetItems(string userId);
+        List<Item> GetItems(string userId, ItemsQueryModel query);
         List<Item> GetItems(string userId, DateTime from, DateTime to);
         
         List<Item> GetUncategorizedItems(string userId);

@@ -16,17 +16,21 @@ namespace PenzKoveto.Repository
             this.serviceProvider = serviceProvider;
         }
 
-        public List<Item> GetItems(string userId)
+        public List<Item> GetItems(string userId, ItemsQueryModel query)
         {
             using (var context = serviceProvider.GetService<MoneyContext>())
             {
                 var list = context.Items
-                    .Where(i => i.UserId == userId)
-                    .OrderByDescending(i => i.Date)
+                    .Where(item => item.UserId == userId);
+
+                if (query.CategoryId.HasValue)
+                {
+                    list = list.Where(item => item.CategoryId == query.CategoryId);
+                }
+
+                return list.OrderByDescending(i => i.Date)
                     .Include(i => i.Category)
                     .ToList();
-
-                return list;
             }
         }
 

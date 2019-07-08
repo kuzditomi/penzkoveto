@@ -34,7 +34,8 @@ export function addNewRecord(record: Partial<IRecord>) {
         api.post('items', {
             Name: record.name,
             Cost: record.cost,
-            Type: 0
+            Type: 0,
+            CategoryId: 1
         })
             .then((response) => {
                 if (response.status === 200) {

@@ -22,9 +22,13 @@ namespace Penzkoveto.Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult GetItems()
+        public ActionResult GetItems([FromQuery] Models.ItemsQueryModel queryModel)
         {
-            var list = moneyRepository.GetItems(CurrentUserId)
+            var query = new PenzKoveto.Repository.Models.ItemsQueryModel{
+                CategoryId = queryModel.CategoryId
+            };
+            
+            var list = moneyRepository.GetItems(CurrentUserId, query)
                     .Select(i => new ListItem(i))
                     .ToList();
 
@@ -116,7 +120,7 @@ namespace Penzkoveto.Web.Controllers
 
                 return Ok();
             }
-            catch (Exception ex)
+            catch
             {
                 ModelState.AddModelError("", "Hiba történt. Bocsi");
                 return new StatusCodeResult(500);
