@@ -6,11 +6,10 @@ import { IRecord } from '../../Models/record';
 import { addNewRecord, dispatchAddNew } from './addnew.actions';
 import { ICategory } from '../../Models/category';
 import { loadCategories } from '../../categories.actions';
-import { hasValue } from '../../Shared/functions';
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 type AddNewPageProps = RouteComponentProps & {
-    init: ()=> void;
+    init: () => void;
     addNewState: Loading<boolean>,
     onAddNew(record: Partial<IRecord>): void;
     categories: Loading<ICategory[]>;
@@ -20,7 +19,7 @@ const AddNewPage: React.FC<AddNewPageProps> = ({ init, addNewState, onAddNew, ca
     const [initDone, setInit] = useState(false);
 
     useEffect(() => {
-        if(!initDone){
+        if (!initDone) {
             init();
             setInit(true);
             return;
@@ -29,7 +28,7 @@ const AddNewPage: React.FC<AddNewPageProps> = ({ init, addNewState, onAddNew, ca
         if (addNewState === true) {
             history.push('/list');
         }
-    });
+    }, [initDone, addNewState, init, history]);
 
     const categoryList = categories === 'loading' || categories === undefined ? [] : categories;
 

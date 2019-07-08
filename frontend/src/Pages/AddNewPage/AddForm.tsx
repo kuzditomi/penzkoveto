@@ -38,7 +38,7 @@ const AddNewForm: React.FC<AddNewFormProps> = ({ addNew, categories }) => {
 
     const getCategories = (): IAutocompleteSuggestion[] => {
         return (categories || []).map(c => ({
-            name: c.name,
+            label: c.name,
             value: c.id
         }));
     }
