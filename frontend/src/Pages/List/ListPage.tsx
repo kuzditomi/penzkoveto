@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, makeStyles, Theme, Typography, CircularProgress, Fab } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -28,12 +28,21 @@ type ListPageProps = {
 
 const ListPage: React.FC<ListPageProps> = ({ items, loadList }) => {
     const classes = useStyles();
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        if (items === undefined) {
-            loadList();
+        if (loaded) {
+            return;
         }
-    });
+
+        setLoaded(true);
+
+        if (items === 'loading') {
+            return;
+        }
+
+        loadList();
+    }, [loaded, items, loadList]);
 
     let content;
     if (items === "loading") {
@@ -44,7 +53,7 @@ const ListPage: React.FC<ListPageProps> = ({ items, loadList }) => {
                 <Fab component={Link} to="/add-new" color="primary" size="small" variant="extended">
                     <AddIcon /> ADD
                 </Fab>
-                <Fab color="secondary" size="small" variant="extended" className={classes.margin} onClick={()=>{ loadList() }}>
+                <Fab color="secondary" size="small" variant="extended" className={classes.margin} onClick={() => { loadList() }}>
                     <RefreshIcon /> RELOAD
                 </Fab>
                 <ItemList items={items}></ItemList>

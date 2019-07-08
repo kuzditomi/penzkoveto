@@ -44,7 +44,8 @@ export function addNewRecord(record: Partial<IRecord>) {
                 throw response.status;
             })
             .then(() => {
-                dispatch(dispatchAddNewSuccess())
+                dispatch(dispatchAddNewSuccess());
+                // window.location.replace('/list');
             })
         // .catch(() => {
         //     dispatch(dispatchTokenFailed());

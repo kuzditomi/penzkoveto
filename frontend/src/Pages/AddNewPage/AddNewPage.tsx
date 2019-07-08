@@ -7,18 +7,24 @@ import { addNewRecord } from './addnew.actions';
 import { ICategory } from '../../Models/category';
 import { loadCategories } from '../../categories.actions';
 import { hasValue } from '../../Shared/functions';
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-type AddNewPageProps = {
+type AddNewPageProps = RouteComponentProps & {
+    addNewState: Loading<boolean>,
     onAddNew(record: Partial<IRecord>): void;
     categories: Loading<ICategory[]>;
 
     loadCategories(): void;
 }
 
-const AddNewPage: React.FC<AddNewPageProps> = ({ onAddNew, categories, loadCategories }) => {
+const AddNewPage: React.FC<AddNewPageProps> = ({ addNewState, onAddNew, categories, loadCategories, history }) => {
     useEffect(() => {
         if (!hasValue(categories)) {
             loadCategories();
+        }
+
+        if(addNewState === true){
+            history.push('/list');
         }
     });
 
@@ -31,6 +37,7 @@ const AddNewPage: React.FC<AddNewPageProps> = ({ onAddNew, categories, loadCateg
 
 const mapStateToProps = (store: AppState) => {
     return {
+        addNewState: store.addNew,
         categories: store.categories
     }
 };
@@ -44,4 +51,4 @@ const mapDispatchToProps = (dispatch: any) => ({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNewPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddNewPage));
