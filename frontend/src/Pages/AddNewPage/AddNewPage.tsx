@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../app.reducer';
 import AddNewForm from './AddForm';
-import { IRecord } from '../../Models/record';
 import { addNewRecord, dispatchAddNew } from './addnew.actions';
 import { ICategory } from '../../Models/category';
 import { loadCategories } from '../../categories.actions';
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { INewRecord } from '../../Models/new-record';
 
 type AddNewPageProps = RouteComponentProps & {
     init: () => void;
     addNewState: Loading<boolean>,
-    onAddNew(record: Partial<IRecord>): void;
+    onAddNew(record: INewRecord): void;
     categories: Loading<ICategory[]>;
 }
 
@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch: any) => ({
         dispatch(dispatchAddNew());
         dispatch(loadCategories());
     },
-    onAddNew: (record: Partial<IRecord>) => {
+    onAddNew: (record: INewRecord) => {
         dispatch(addNewRecord(record));
     },
 });

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, Typography, Paper, Grid, TextField, Button } from '@material-ui/core';
-import { IRecord } from '../../Models/record';
 import Autocomplete, { IAutocompleteSuggestion } from './../../Shared/Autocomplete';
 import { ICategory } from '../../Models/category';
+import { INewRecord, NewRecordType } from '../../Models/new-record';
 
 const useStyles = makeStyles((theme: Theme) => ({
     paper: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type AddNewFormProps = {
-    addNew(record: Partial<IRecord>): void;
+    addNew(record: INewRecord): void;
     categories: ICategory[];
 }
 
@@ -25,23 +25,31 @@ const AddNewForm: React.FC<AddNewFormProps> = ({ addNew, categories }) => {
     const classes = useStyles();
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
+    const [categoryId, setCategoryId] = useState();
 
     const recordNew = () => {
-        const model: Partial<IRecord> = {
-            name: name,
+        const model: INewRecord = {
+            name,
             cost: Number(cost),
-            date: new Date().toUTCString()
+            type: NewRecordType.Spending,
+            // date: new Date().toUTCString(),
+            categoryId,
         };
 
         addNew(model);
     };
 
-    const getCategories = (): IAutocompleteSuggestion[] => {
+    function getCategories(input: string | null): IAutocompleteSuggestion[] {
         return (categories || []).map(c => ({
             label: c.name,
-            value: c.id
+            key: c.id
         }));
     }
+
+    function updateCategoryId(suggestion: IAutocompleteSuggestion) {
+        setCategoryId(suggestion.key);
+    }
+
 
     return (
         <Paper className={classes.paper}>
@@ -74,8 +82,9 @@ const AddNewForm: React.FC<AddNewFormProps> = ({ addNew, categories }) => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Autocomplete
-                        label="Category"
-                        suggestions={getCategories}
+                        // label="Category"
+                        getSuggestions={getCategories}
+                        onSelect={updateCategoryId}
                     />
                 </Grid>
                 <Grid item xs={12}>

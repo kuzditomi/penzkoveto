@@ -25,6 +25,7 @@ const ItemList: React.FC<ItemsListProps> = ({ items }) => {
                     <TableRow>
                         <TableCell>Id</TableCell>
                         <TableCell>Type</TableCell>
+                        <TableCell>Category</TableCell>
                         <TableCell>Name</TableCell>
                         <TableCell>Amount</TableCell>
                         <TableCell>Date</TableCell>
@@ -37,6 +38,7 @@ const ItemList: React.FC<ItemsListProps> = ({ items }) => {
                                 {item.id}
                             </TableCell>
                             <TableCell>{item.type}</TableCell>
+                            <TableCell>{item.category.name}</TableCell>
                             <TableCell>{item.name}</TableCell>
                             <TableCell>{item.cost}</TableCell>
                             <TableCell><DisplayDateTime dateTime={item.date}/></TableCell>

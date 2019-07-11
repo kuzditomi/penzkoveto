@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import api from "../../api";
-import { IRecord } from "../../Models/record";
+import { INewRecord } from "../../Models/new-record";
 
 export const ACTION_ADD_NEW = 'ADD_NEW';
 export const ACTION_ADD_NEW_START = 'ADD_NEW_START';
@@ -38,15 +38,15 @@ export function dispatchAddNewSuccess(): IActionAddNewSuccess {
     };
 }
 
-export function addNewRecord(record: Partial<IRecord>) {
+export function addNewRecord(record: INewRecord) {
     return (dispatch: any) => {
         dispatch(dispatchAddNewStart());
 
         api.post('items', {
             Name: record.name,
             Cost: record.cost,
-            Type: 0,
-            CategoryId: 1
+            Type: record.type,
+            CategoryId: record.categoryId
         })
             .then((response) => {
                 if (response.status === 200) {
