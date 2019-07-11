@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using PenzKoveto.Repository.Models;
 
-namespace Penzkoveto.Web.Models
+namespace PenzKoveto.Web.Models
 {
     public class EditItemModel
     {

@@ -213,5 +213,26 @@ namespace PenzKoveto.Repository
                 context.SaveChanges();
             }
         }
+
+        public Statistics GetStatistics(string userId, DateTime from, DateTime to)
+        {
+            using (var context = serviceProvider.GetService<MoneyContext>())
+            {
+                var statistics = context.Items
+                    .Where(i => i.Date >= from && i.Date <= to)
+                    .GroupBy(i => i.CategoryId)
+                    .Select(g => new CategoryStatistics
+                    {
+                        CategoryId = g.Key,
+                        Cost = g.Sum(gi => gi.Cost)
+                    })
+                    .ToList();
+
+                return new Statistics
+                {
+                    CategoryStatistics = statistics
+                };
+            }
+        }
     }
 }

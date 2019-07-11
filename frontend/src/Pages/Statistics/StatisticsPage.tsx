@@ -43,7 +43,6 @@ const StatisticsPage: React.FC<StatisticsPageProps> = ({ statistics, loadStatist
         content = (<pre> { JSON.stringify(statistics) }</pre>)
     }
 
-
     return (
         <Container maxWidth="lg" className={classes.container}>
             <Typography variant="h3">Statistics</Typography>

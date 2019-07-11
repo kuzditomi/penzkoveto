@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using PenzKoveto.Repository.Models;
-using Penzkoveto.Web.Models;
+using PenzKoveto.Web.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using PenzKoveto.Repository;
 using PenzKoveto.Repository.Models;
-using Penzkoveto.Web.Models;
+using PenzKoveto.Web.Models;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +22,7 @@ namespace Penzkoveto.Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult GetItems([FromQuery] Models.ItemsQueryModel queryModel)
+        public ActionResult GetItems([FromQuery] PenzKoveto.Web.Models.ItemsQueryModel queryModel)
         {
             var query = new PenzKoveto.Repository.Models.ItemsQueryModel{
                 CategoryId = queryModel.CategoryId

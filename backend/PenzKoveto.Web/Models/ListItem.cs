@@ -1,7 +1,7 @@
 ﻿using System;
 using PenzKoveto.Repository.Models;
 
-namespace Penzkoveto.Web.Models
+namespace PenzKoveto.Web.Models
 {
     public class ListItem
     {

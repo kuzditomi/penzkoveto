@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Penzkoveto.Web.Models
+namespace PenzKoveto.Web.Models
 {
     public class ItemsListViewModel
     {

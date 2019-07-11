@@ -23,5 +23,8 @@ namespace PenzKoveto.Repository
         void UpdateCategory(Category category);
         void AddItemToCategory(int itemId, int categoryId);
         void RemoveCategory(int id);
+
+        // Statistics
+        Statistics GetStatistics(string userId, DateTime from, DateTime to);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Penzkoveto.Web.Models
+namespace PenzKoveto.Web.Models
 {
     public class UserCreateModel
     {

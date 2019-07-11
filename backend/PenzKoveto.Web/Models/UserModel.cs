@@ -1,4 +1,4 @@
-﻿namespace Penzkoveto.Web.Models
+﻿namespace PenzKoveto.Web.Models
 {
     public class UserModel
     {

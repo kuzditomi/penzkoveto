@@ -33,7 +33,7 @@ export function loadStatistics() {
     return (dispatch: any) => {
         dispatch(dispatchStatistiscLoad());
 
-        api.get('charts')
+        api.get('statistics')
             .then((response) => {
                 if (response.status === 200) {
                     return response.data;

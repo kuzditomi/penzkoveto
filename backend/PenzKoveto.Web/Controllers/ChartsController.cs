@@ -1,5 +1,5 @@
 ﻿using PenzKoveto.Repository;
-using Penzkoveto.Web.Models;
+using PenzKoveto.Web.Models;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -19,39 +19,31 @@ namespace Penzkoveto.Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult GetChartData()
+        public ActionResult GetOldChartData()
         {
-            try
-            {
-                var year = DateTime.Now.Year;
-                var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
+            var month = DateTime.Now.Month;
 
-                var from = new DateTime(year, month, 1);
-                var to = from.AddMonths(1);
+            var from = new DateTime(year, month, 1);
+            var to = from.AddMonths(1);
 
-                var items = moneyRepository.GetItems(CurrentUserId, from, to)
-                        .Select(i => new ListItem(i))
-                        .ToList();
-
-                var categories = moneyRepository.GetCategories(CurrentUserId)
-                    .Select(c => new CategoryListItem(c))
+            var items = moneyRepository.GetItems(CurrentUserId, from, to)
+                    .Select(i => new ListItem(i))
                     .ToList();
 
-                categories.Add(CategoryListItem.Empty);
+            var categories = moneyRepository.GetCategories(CurrentUserId)
+                .Select(c => new CategoryListItem(c))
+                .ToList();
 
-                var model = new ChartViewModel
-                {
-                    Categories = categories,
-                    Items = items
-                };
+            categories.Add(CategoryListItem.Empty);
 
-                return Ok(model);
-            }
-            catch (Exception ex)
+            var model = new ChartViewModel
             {
-                Console.WriteLine(ex.Message);
-                return Ok(null);
-            }
+                Categories = categories,
+                Items = items
+            };
+
+            return Ok(model);
         }
     }
 }

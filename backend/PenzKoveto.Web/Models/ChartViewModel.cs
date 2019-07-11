@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using PenzKoveto.Repository.Models;
+﻿using System.Collections.Generic;
 
-namespace Penzkoveto.Web.Models
+namespace PenzKoveto.Web.Models
 {
     public class ChartViewModel
     {
