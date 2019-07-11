@@ -5,6 +5,8 @@ import { listReducer, defaultListState } from "./Pages/List/list.reducer";
 import { addnewReducer, defaultAddnewState } from "./Pages/AddNewPage/addnew.reducer";
 import { ICategory } from "./Models/category";
 import { categoriesReducer, defaultCategoriesState } from "./categories.reducer";
+import { IStatistics } from "./Models/statistics";
+import { statisticsReducer, defaultStatisticsState } from "./Pages/Statistics/statistics.reducer";
 
 export interface IUserInfo{
     id: string;
@@ -22,6 +24,7 @@ export interface AppState {
     list: Loading<IRecord[]>;
     addNew: Loading<boolean>;
     categories: Loading<ICategory[]>;
+    statistics: Loading<IStatistics>;
 }
 
 export function appReducer(state: AppState = defaultState(), action: Action) {
@@ -30,6 +33,7 @@ export function appReducer(state: AppState = defaultState(), action: Action) {
         list: listReducer(state, action),
         addNew: addnewReducer(state, action),
         categories: categoriesReducer(state, action),
+        statistics: statisticsReducer(state, action),
     };
 }
 
@@ -39,5 +43,6 @@ export function defaultState(): AppState {
         list: defaultListState(),
         addNew: defaultAddnewState(),
         categories: defaultCategoriesState(),
+        statistics: defaultStatisticsState(),
     };
 }

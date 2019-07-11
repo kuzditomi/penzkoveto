@@ -18,32 +18,40 @@ namespace Penzkoveto.Web.Controllers
         }
 
         [HttpGet]
-        [Route("{year?}/{month?}")]
-        public ActionResult GetChartData(int year = 0, int month = 0)
+        [Route("")]
+        public ActionResult GetChartData()
         {
-            year = year == 0 || month == 0 ? DateTime.Now.Year : year;
-            month = month == 0 || month == 0 ? DateTime.Now.Month : month;
+            try
+            {
+                var year = DateTime.Now.Year;
+                var month = DateTime.Now.Month;
 
-            var from = new DateTime(year, month, 1);
-            var to = from.AddMonths(1);
+                var from = new DateTime(year, month, 1);
+                var to = from.AddMonths(1);
 
-            var items = moneyRepository.GetItems(CurrentUserId, from, to)
-                    .Select(i => new ListItem(i))
+                var items = moneyRepository.GetItems(CurrentUserId, from, to)
+                        .Select(i => new ListItem(i))
+                        .ToList();
+
+                var categories = moneyRepository.GetCategories(CurrentUserId)
+                    .Select(c => new CategoryListItem(c))
                     .ToList();
 
-            var categories = moneyRepository.GetCategories(CurrentUserId)
-                .Select(c => new CategoryListItem(c))
-                .ToList();
-            
-            categories.Add(CategoryListItem.Empty);
+                categories.Add(CategoryListItem.Empty);
 
-            var model = new ChartViewModel
+                var model = new ChartViewModel
+                {
+                    Categories = categories,
+                    Items = items
+                };
+
+                return Ok(model);
+            }
+            catch (Exception ex)
             {
-                Categories = categories,
-                Items = items
-            };
-
-            return Ok(model);
+                Console.WriteLine(ex.Message);
+                return Ok(null);
+            }
         }
     }
 }

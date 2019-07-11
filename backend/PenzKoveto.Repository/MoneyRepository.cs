@@ -155,7 +155,6 @@ namespace PenzKoveto.Repository
 
         public List<Category> GetCategories(string userId)
         {
-
             using (var context = serviceProvider.GetService<MoneyContext>())
             {
                 var categories = context.Categories.Where(c => c.UserId == userId).ToList();

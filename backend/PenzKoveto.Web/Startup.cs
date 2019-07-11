@@ -46,8 +46,9 @@ namespace PenzKoveto.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MoneyContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection"))
+            services.AddDbContext<MoneyContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")),
+                ServiceLifetime.Transient
             );
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

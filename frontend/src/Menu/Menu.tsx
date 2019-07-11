@@ -7,6 +7,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
 import ListIcon from '@material-ui/icons/List';
+import PieChartIcon from '@material-ui/icons/PieChart';
 
 export const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) => ({
@@ -82,6 +83,12 @@ const Menu: React.FC<MainProps> = ({ isOpen, onToggle }) => {
                         <ListIcon />
                     </ListItemIcon>
                     <ListItemText primary="List" />
+                </ListItem>
+                <ListItem button component={Link} to="/statistics">
+                    <ListItemIcon>
+                        <PieChartIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Statistics" />
                 </ListItem>
             </List>
         </Drawer>
