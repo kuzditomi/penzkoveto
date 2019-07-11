@@ -29,6 +29,7 @@ namespace PenzKoveto.Repository
                 }
 
                 return list.OrderByDescending(i => i.Date)
+                    .Take(50)
                     .Include(i => i.Category)
                     .ToList();
             }

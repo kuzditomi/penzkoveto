@@ -63,7 +63,7 @@ const ListPage: React.FC<ListPageProps> = ({ items, loadList }) => {
 
     return (
         <Container maxWidth="lg" className={classes.container}>
-            <Typography variant="h3">Uncategorized items</Typography>
+            <Typography variant="h3">Recorded items</Typography>
             {content}
         </Container>
     );
