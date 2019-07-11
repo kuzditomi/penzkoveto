@@ -38,7 +38,7 @@ namespace Penzkoveto.Web.Controllers
                         return new CategoryStatistics
                         {
                             Category = cat == null ? null : new CategoryListItem(cat),
-                            Cost = s.Cost
+                            TotalAmount = s.TotalAmount
                         };
                     })
                 };

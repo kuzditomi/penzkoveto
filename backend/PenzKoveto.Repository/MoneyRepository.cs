@@ -224,7 +224,7 @@ namespace PenzKoveto.Repository
                     .Select(g => new CategoryStatistics
                     {
                         CategoryId = g.Key,
-                        Cost = g.Sum(gi => gi.Cost)
+                        TotalAmount = g.Sum(gi => gi.Cost)
                     })
                     .ToList();
 
