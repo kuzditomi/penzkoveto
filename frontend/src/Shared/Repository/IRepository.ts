@@ -3,6 +3,7 @@ import { LoginData } from "../../Pages/Login/login.action";
 import { IStatistics } from "../../Models/statistics";
 import { IUserInfo } from "../../app.reducer";
 import { ICategory } from "../../Models/category";
+import { INewRecord } from "../../Models/new-record";
 
 export interface IRepository {
     Login(login: LoginData): Promise<string>;
@@ -15,7 +16,7 @@ export interface IRepository {
     GetCategories(): Promise<ICategory[]>;
     
     GetItems(): Promise<IRecord[]>;
-    AddItem(item: any): Promise<any>;
+    AddItem(item: INewRecord): Promise<any>;
 
     GetStatistics(): Promise<IStatistics>;
 }

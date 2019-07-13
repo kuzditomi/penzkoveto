@@ -5,5 +5,6 @@
         "frontend/app/node_modules/": true,
         "frontend/app/platforms/": true,
         "frontend/app/plugins/": true,
-    }
+    },
+    "editor.suggestSelection": "first"
 }

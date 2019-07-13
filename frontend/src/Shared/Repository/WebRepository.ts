@@ -4,6 +4,7 @@ import { IRecord } from '../../Models/record';
 import { LoginData } from '../../Pages/Login/login.action';
 import { IStatistics } from '../../Models/statistics';
 import { ICategory } from '../../Models/category';
+import { INewRecord } from '../../Models/new-record';
 
 const tokenStorageKey = 'auth_token';
 
@@ -35,7 +36,7 @@ export class WebRepository implements IRepository {
             });
     }
 
-    AddItem(record: any): Promise<any> {
+    AddItem(record: INewRecord): Promise<any> {
         return this.api.post('items', record)
             .then((response) => {
                 if (response.status === 200) {

@@ -7,5 +7,5 @@ export interface INewRecord {
     name: string;
     cost: number;
     type: NewRecordType;
-    categoryId?: number;
+    categoryId: number;
 }

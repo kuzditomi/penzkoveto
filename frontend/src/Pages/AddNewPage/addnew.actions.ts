@@ -42,12 +42,7 @@ export function addNewRecord(record: INewRecord) {
     return (dispatch: any) => {
         dispatch(dispatchAddNewStart());
 
-        Repository.Instance.AddItem({
-            Name: record.name,
-            Cost: record.cost,
-            Type: record.type,
-            CategoryId: record.categoryId
-        })
+        Repository.Instance.AddItem(record)
             .then(() => {
                 dispatch(dispatchAddNewSuccess());
                 // window.location.replace('/list');
