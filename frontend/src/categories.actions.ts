@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import { ICategory } from "./Models/category";
-import api from "./api";
+import { Repository } from "./Shared/Repository/Repository";
 
 export const ACTION_LOAD_CATEGORIES = 'LOAD_CATEGORIES';
 export const ACTION_LOAD_CATEGORIES_SUCCESS = 'LOAD_CATEGORIES_SUCCESS';
@@ -33,14 +33,7 @@ export function loadCategories() {
     return (dispatch: any) => {
         dispatch(dispatchLoadCategoriesStart());
 
-        api.get('categories')
-            .then((response) => {
-                if (response.status === 200) {
-                    return response.data;
-                }
-
-                throw response.status;
-            })
+        Repository.Instance.GetCategories()
             .then((categories: ICategory[]) => {
                 dispatch(dispatchLoadCategoriesSuccess(categories))
             });

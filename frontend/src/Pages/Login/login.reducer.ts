@@ -1,12 +1,12 @@
 import { AppState, IUserData } from '../../app.reducer';
 import { tokenValidateActions, ACTION_TOKEN_VALIDATE_ERROR } from '../../token-validate.actions';
 import { ACTION_TOKEN_VALIDATE_SUCCESS, ACTION_USER_INFO_SUCCESS } from '../../token-validate.actions';
-import { tokenStorageKey } from '../../api';
+import { Repository } from '../../Shared/Repository/Repository';
 
 export function userReducer(state: AppState, action: tokenValidateActions): IUserData {
     switch (action.type) {
         case ACTION_TOKEN_VALIDATE_SUCCESS:
-            localStorage.setItem(tokenStorageKey, action.token);
+            Repository.Instance.SaveToken(action.token);
 
             return {
                 ...state.user,

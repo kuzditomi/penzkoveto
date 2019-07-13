@@ -1,6 +1,6 @@
 import { Action } from "redux";
-import api from "../../api";
 import { IRecord } from "../../Models/record";
+import { Repository } from "../../Shared/Repository/Repository";
 
 export const ACTION_LOAD_LIST_START = 'LIST_LOAD_START';
 export const ACTION_LOAD_LIST_SUCCESS = 'LIST_LOAD_SUCCESS';
@@ -33,14 +33,7 @@ export function loadList() {
     return (dispatch: any) => {
         dispatch(dispatchListLoad());
 
-        api.get('items')
-            .then((response) => {
-                if (response.status === 200) {
-                    return response.data;
-                }
-
-                throw response.status;
-            })
+        Repository.Instance.GetItems()
             .then((json: IRecord[]) => {
                 dispatch(dispatchListSuccess(json))
             })

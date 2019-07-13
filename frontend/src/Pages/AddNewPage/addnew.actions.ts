@@ -1,6 +1,6 @@
 import { Action } from "redux";
-import api from "../../api";
 import { INewRecord } from "../../Models/new-record";
+import { Repository } from "../../Shared/Repository/Repository";
 
 export const ACTION_ADD_NEW = 'ADD_NEW';
 export const ACTION_ADD_NEW_START = 'ADD_NEW_START';
@@ -42,19 +42,12 @@ export function addNewRecord(record: INewRecord) {
     return (dispatch: any) => {
         dispatch(dispatchAddNewStart());
 
-        api.post('items', {
+        Repository.Instance.AddItem({
             Name: record.name,
             Cost: record.cost,
             Type: record.type,
             CategoryId: record.categoryId
         })
-            .then((response) => {
-                if (response.status === 200) {
-                    return;
-                }
-
-                throw response.status;
-            })
             .then(() => {
                 dispatch(dispatchAddNewSuccess());
                 // window.location.replace('/list');

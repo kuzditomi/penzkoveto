@@ -1,21 +1,19 @@
 import { dispatchTokenFailed, loadUser } from "../../token-validate.actions";
-import api, { tokenStorageKey } from "../../api";
+import { Repository } from './../../Shared/Repository/Repository';
+
+export interface LoginData {
+    UserName: string;
+    Password: string;
+}
 
 export function login(username: string, password: string) {
     return (dispatch: any) => {
-        api.post('account/login', {
+        Repository.Instance.Login({
             UserName: username,
             Password: password
         })
-            .then((response) => {
-                if (response.status === 200) {
-                    return response.data;
-                }
-
-                throw response.status;
-            })
-            .then((json: { token: string }) => {
-                localStorage.setItem(tokenStorageKey, json.token);
+            .then((token: string) => {
+                Repository.Instance.SaveToken(token);
                 dispatch(loadUser());
             })
             .catch(() => {
@@ -26,7 +24,7 @@ export function login(username: string, password: string) {
 
 export function logout() {
     return (dispatch: any) => {
-        localStorage.removeItem(tokenStorageKey);
+        Repository.Instance.RemoveToken();
         dispatch(dispatchTokenFailed());
     }
 }

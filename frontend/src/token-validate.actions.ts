@@ -1,6 +1,6 @@
 import { Action } from "redux";
-import api, { tokenStorageKey } from "./api";
 import { IUserInfo } from "./app.reducer";
+import { Repository } from './Shared/Repository/Repository';
 
 export const ACTION_TOKEN_VALIDATE_SUCCESS = 'TOKEN_VALIDATE_SUCCESS';
 export const ACTION_TOKEN_VALIDATE_ERROR = 'TOKEN_VALIDATE_ERROR';
@@ -47,16 +47,10 @@ function dispatchUserInfo(userInfo: IUserInfo): IActionUserInfoSuccess {
 
 export function loadUser() {
     return (dispatch: any) => {
-        const storedToken = localStorage.getItem(tokenStorageKey);
+        
+        const storedToken = Repository.Instance.GetToken();
         if (storedToken) {
-            api.get('account/me')
-                .then((response) => {
-                    if (response.status === 200) {
-                        return response.data;
-                    }
-
-                    throw response.status;
-                })
+            Repository.Instance.GetUserInfo()
                 .then((userinfo: IUserInfo) => {
                     dispatch(dispatchTokenSuccess(storedToken));
                     dispatch(dispatchUserInfo(userinfo));
