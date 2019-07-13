@@ -12,7 +12,7 @@ export class WebRepository implements IRepository {
 
     constructor() {
         this.api = axios.create({
-            baseURL: `https://${window.location.hostname}:5001/api`,
+            baseURL: `https://192.168.1.3:5001/api`,
             headers: {
                 'Content-Type': 'application/json',
             }
