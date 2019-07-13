@@ -1,6 +1,9 @@
 {
     "git.ignoreLimitWarning": true,
     "files.exclude": {
-        "frontend/node_modules/": true
+        "frontend/node_modules/": true,
+        "frontend/app/node_modules/": true,
+        "frontend/app/platforms/": true,
+        "frontend/app/plugins/": true,
     }
 }

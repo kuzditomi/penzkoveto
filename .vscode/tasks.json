@@ -4,6 +4,36 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Start mobile:emulator",
+            "type": "shell",
+            "command": "cordova run --emulator",
+            "options": {
+                "cwd": "frontend/app"
+            },
+            "problemMatcher": [
+                "$eslint-stylish"
+            ],
+            "group": "build",
+            "presentation": {
+                "group": "cordova"
+            }
+        },
+        {
+            "label": "Start mobile:device",
+            "type": "shell",
+            "command": "cordova run android",
+            "options": {
+                "cwd": "frontend/app"
+            },
+            "problemMatcher": [
+                "$eslint-stylish"
+            ],
+            "group": "build",
+            "presentation": {
+                "group": "cordova"
+            }
+        },
+        {
             "label": "Start frontend",
             "type": "shell",
             "command": "yarn start",
@@ -33,7 +63,7 @@
             }
         },
         {
-            "label": "Start all",
+            "label": "Start backend & serve",
             "dependsOn": [
                 "Start backend",
                 "Start frontend"
