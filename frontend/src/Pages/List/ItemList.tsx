@@ -5,7 +5,6 @@ import DisplayDateTime from '../../Shared/DisplayDateTime';
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
-        // width: '50%',
         marginTop: theme.spacing(3),
         overflowX: 'auto',
     },

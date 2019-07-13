@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../app.reducer';
-import { Container, Typography, makeStyles, Theme, CircularProgress } from '@material-ui/core';
+import { Container, Typography, makeStyles, Theme, CircularProgress, Grid } from '@material-ui/core';
 import { loadStatistics } from './statistics.actions';
 import StatisticsTable from './StatisticsTable';
+import StatisticsChart from './StatisticsChart';
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -40,7 +41,12 @@ const StatisticsPage: React.FC<StatisticsPageProps> = ({ statistics, loadStatist
     if (statistics === "loading") {
         content = <CircularProgress />
     } else if (statistics !== undefined) {
-        content = (<StatisticsTable statistics={statistics}></StatisticsTable>)
+        content = (
+            <Grid container spacing={3}>
+                <StatisticsTable statistics={statistics}></StatisticsTable>
+                <StatisticsChart statistics={statistics}></StatisticsChart>
+            </Grid>
+        )
     }
 
     return (
