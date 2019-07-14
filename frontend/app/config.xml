@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.kuzditomi.penzkoveto" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HelloCordova</name>
+<widget id="com.kuzditomi.penzkoveto" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PenzKoveto 2.0</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Penzkoveto 2.0
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <icon src="res/icon.png"/>
+    <author email="kuzditomi@gmail.com">
+        Tamas Kuzdi
     </author>
     <content src="index.html" />
     <access origin="*" />

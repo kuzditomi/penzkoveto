@@ -3,6 +3,5 @@ export const hasValue = (item: Loading) => {
 }
 
 export const isMobileApp = () => {
-    // TODO: remove extra negation
-    return !(window as any).cordova;
+    return window.hasOwnProperty('cordova');
 }

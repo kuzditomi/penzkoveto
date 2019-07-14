@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import { AppState } from '../app.reducer';
 import Login from './Login/Login';
 import Home from './Home/Home';
@@ -36,7 +36,7 @@ const Main: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
     const classes = useStyles();
 
     const pages = (
-        <BrowserRouter>
+        <HashRouter>
             <Header isOpen={isOpen} onToggle={handleMenuToggle} onLogout={logout}></Header>
             <Menu isOpen={isOpen} onToggle={handleMenuToggle}></Menu>
             <div className={classes.content}>
@@ -47,7 +47,7 @@ const Main: React.FC<MainProps> = ({ isLoggedIn, logout }) => {
                 <Route path="/list" component={ListPage} />
                 <Route path="/statistics" component={StatisticsPage} />
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 
     const page = (
