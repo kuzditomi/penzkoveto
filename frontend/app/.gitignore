@@ -5,6 +5,7 @@ npm-debug.log
 # Cordova
 /platforms
 /plugins
+/www
 
 !plugins/**/*.json
 !plugins/**/*.xml

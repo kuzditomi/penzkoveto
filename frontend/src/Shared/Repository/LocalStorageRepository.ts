@@ -59,7 +59,7 @@ export class LocalStorageRepository implements IRepository {
             this.idCounter = 1;
         } else {
             this.data = JSON.parse(data);
-            this.idCounter = Number(this.data.items[this.data.items.length - 1].id) + 1;
+            this.idCounter = this.data.items.length > 0 ? Number(this.data.items[this.data.items.length - 1].id) + 1 : 1;
         }
     }
 
