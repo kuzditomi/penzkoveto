@@ -3,5 +3,5 @@ export const hasValue = (item: Loading) => {
 }
 
 export const isMobileApp = () => {
-    return window.hasOwnProperty('cordova');
+    return !window.hasOwnProperty('cordova');
 }

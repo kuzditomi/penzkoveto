@@ -9,8 +9,7 @@ namespace PenzKoveto.Web.Models
 {
     public class AddItemModel
     {
-        [Required]
-        public string Name { get; set; }
+        public string Description { get; set; }
         
         [Required]
         [Range(0, 500000)]

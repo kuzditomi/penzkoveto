@@ -90,7 +90,7 @@ namespace Penzkoveto.Web.Controllers
                 Id = item.Id,
                 CategoryId = item.CategoryId,
                 Cost = item.Cost,
-                Name = item.Name,
+                Description = item.Name,
                 Type = item.Type
             };
 
@@ -108,7 +108,7 @@ namespace Penzkoveto.Web.Controllers
             {
                 var item = new Item
                 {
-                    Name = model.Name,
+                    Name = model.Description,
                     Cost = model.Cost.Value,
                     UserId = CurrentUserId,
                     Date = DateTime.UtcNow,
@@ -150,7 +150,7 @@ namespace Penzkoveto.Web.Controllers
             moneyRepository.UpdateItem(new Item
             {
                 Id = model.Id,
-                Name = model.Name,
+                Name = model.Description,
                 CategoryId = model.CategoryId,
                 Cost = model.Cost.Value,
                 Type = model.Type

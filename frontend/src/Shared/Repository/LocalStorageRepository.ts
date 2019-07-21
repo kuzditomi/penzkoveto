@@ -15,32 +15,21 @@ interface IPenzkovezoStorage {
 
 const itemTypes = {
     [NewRecordType.Income] : "Income",
-    [NewRecordType.Spending]: "Spending"
-}
-
-const categories = [
-    {
-        id: 1,
-        name: 'A',
-        color: ''
-    },
-    {
-        id: 2,
-        name: 'B',
-        color: ''
-    },
-    {
-        id: 3,
-        name: 'C',
-        color: ''
-    },
-];
+    [NewRecordType.Spending]: "Expense"
+};
+   
+const categoryNames = ['Bills', 'Clothing', 'Food', 'Fun', 'Grocery', 'Health', 'Transportation', 'Other'];
+const categories = categoryNames.map((category, index) => ({
+    id: index,
+    name: category,
+    color: '#000000'
+}));
 
 interface IStoredRecord {
     id: string;
-    name: string;
+    description: string;
     cost: number;
-    type: string;
+    type: NewRecordType;
     date: string;
     categoryId: number;
 }
@@ -99,6 +88,7 @@ export class LocalStorageRepository implements IRepository {
     GetItems(): Promise<IRecord[]> {
         const items = this.data.items.map(item =>({
             ...item,
+            type: itemTypes[item.type],
             category: categories.find(c => c.id === item.categoryId) as ICategory
         }));
 
@@ -107,11 +97,11 @@ export class LocalStorageRepository implements IRepository {
     AddItem(item: INewRecord): Promise<any> {
         const newRecord: IStoredRecord = {
             id: (this.idCounter++).toString(),
-            name: item.name,
+            description: item.name,
             date: new Date().toUTCString(),
             cost: item.cost,
             categoryId: item.categoryId,
-            type: itemTypes[item.type]
+            type: item.type
         }
 
         this.data.items = [...this.data.items, newRecord];

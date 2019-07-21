@@ -60,17 +60,6 @@ const AddNewForm: React.FC<AddNewFormProps> = ({ addNew, categories }) => {
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
-                        id="name"
-                        name="name"
-                        label="Description"
-                        fullWidth
-                        value={name}
-                        onChange={(evt: any) => { setName(evt.target.value) }}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
                         type="number"
                         id="cost"
                         name="cost"
@@ -82,9 +71,19 @@ const AddNewForm: React.FC<AddNewFormProps> = ({ addNew, categories }) => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Autocomplete
-                        // label="Category"
+                        required
                         getSuggestions={getCategories}
                         onSelect={updateCategoryId}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="name"
+                        name="name"
+                        label="Description"
+                        fullWidth
+                        value={name}
+                        onChange={(evt: any) => { setName(evt.target.value) }}
                     />
                 </Grid>
                 <Grid item xs={12}>

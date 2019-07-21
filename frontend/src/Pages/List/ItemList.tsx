@@ -22,24 +22,24 @@ const ItemList: React.FC<ItemsListProps> = ({ items }) => {
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Id</TableCell>
-                        <TableCell>Type</TableCell>
-                        <TableCell>Category</TableCell>
-                        <TableCell>Name</TableCell>
+                        {/* <TableCell>Id</TableCell> */}
                         <TableCell>Amount</TableCell>
+                        <TableCell>Category</TableCell>
+                        <TableCell>Description</TableCell>
+                        <TableCell>Type</TableCell>
                         <TableCell>Date</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {items.map(item => (
                         <TableRow key={item.id}>
-                            <TableCell component="th">
+                            {/* <TableCell component="th">
                                 {item.id}
-                            </TableCell>
-                            <TableCell>{item.type}</TableCell>
-                            <TableCell>{item.category.name}</TableCell>
-                            <TableCell>{item.name}</TableCell>
+                            </TableCell> */}
                             <TableCell>{item.cost}</TableCell>
+                            <TableCell>{item.category.name}</TableCell>
+                            <TableCell>{item.description}</TableCell>
+                            <TableCell>{item.type}</TableCell>
                             <TableCell><DisplayDateTime dateTime={item.date}/></TableCell>
                         </TableRow>
                     ))}

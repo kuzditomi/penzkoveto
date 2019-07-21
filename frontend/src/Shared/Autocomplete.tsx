@@ -28,6 +28,7 @@ export interface IAutocompleteSuggestion {
 type AutocompleteProps = {
     getSuggestions: (input: string | null) => IAutocompleteSuggestion[],
     onSelect: (selection: IAutocompleteSuggestion)=>void ;
+    required?: boolean;
 }
 
 const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps) => {
@@ -46,7 +47,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps) => 
                 inputValue
             }) => (
                     <div className={classes.container}>
-                        <TextField label="Category" fullWidth {...getInputProps()} onFocus={() => openMenu()} onClick={() => openMenu()}></TextField>
+                        <TextField required={props.required} label="Category" fullWidth {...getInputProps()} onFocus={() => openMenu()} onClick={() => openMenu()}></TextField>
                         {
                             isOpen ?
                                 <Paper className={classes.paper} square>{
